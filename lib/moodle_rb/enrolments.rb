@@ -16,7 +16,7 @@ module MoodleRb
     # required params:
     # user_id course_id
     def create(params)
-      role = params[:role_id] == '3' ? TEACHER_ROLE_ID : STUDENT_ROLE_ID
+      role = params[:teacher] ? TEACHER_ROLE_ID : STUDENT_ROLE_ID
       response = self.class.post(
         '/webservice/rest/server.php',
         {
