@@ -73,6 +73,7 @@ Create an enrolment
 moodle.enrolments.create(
   :user_id => user_id,
   :course_id => course_id
+  :teacher => false # Teacher or Student
 )
 ```
 

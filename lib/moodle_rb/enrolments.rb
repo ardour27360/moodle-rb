@@ -5,6 +5,7 @@ module MoodleRb
 
     attr_reader :token, :query_options
     STUDENT_ROLE_ID = 5
+    TEACHER_ROLE_ID = 3
 
     def initialize(token, url, query_options)
       @token = token
@@ -15,6 +16,7 @@ module MoodleRb
     # required params:
     # user_id course_id
     def create(params)
+      role = params[:role_id] == '3' ? TEACHER_ROLE_ID : STUDENT_ROLE_ID
       response = self.class.post(
         '/webservice/rest/server.php',
         {
@@ -24,7 +26,7 @@ module MoodleRb
               '0' => {
                 :userid => params[:user_id],
                 :courseid => params[:course_id],
-                :roleid => STUDENT_ROLE_ID
+                :roleid => role
               }
             }
           }
