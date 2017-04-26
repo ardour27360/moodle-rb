@@ -42,6 +42,20 @@ Delete a course
 moodle.courses.destroy(course_id)
 ```
 
+Add a group
+```
+moodle.courses.create_group(
+  :courseid => 4,
+  :name => 'Group 1',
+)
+```
+
+List groups
+```
+moodle.courses.groups(course_id)
+```
+
+
 ### Categories
 
 Create a category
@@ -97,6 +111,14 @@ moodle.users.create(
   :firstname => 'Bruce',
   :lastname => 'Wayne',
   :email => 'bruce@wayneenterprises.com'
+)
+```
+
+Add a user to a group
+```
+moodle.users.add_to_group(
+  :groupid => 4,
+  :userid => 123,
 )
 ```
 

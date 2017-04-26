@@ -32,6 +32,22 @@ module MoodleRb
       response.parsed_response.first
     end
 
+    def add_to_group(params)
+      response = self.class.post(
+        '/webservice/rest/server.php',
+        {
+          :query => query_hash('core_group_add_group_members', token),
+          :body => {
+            :members => {
+              '0' => params
+            }
+          }
+        }.merge(query_options)
+      )
+      check_for_errors(response)
+      response.parsed_response.first
+    end
+
     def show(id)
       response = self.class.post(
         '/webservice/rest/server.php',

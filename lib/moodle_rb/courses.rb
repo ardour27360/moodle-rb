@@ -99,5 +99,35 @@ module MoodleRb
       check_for_errors(response)
       response.parsed_response
     end
+
+    def create_group(params)
+      response = self.class.post(
+        '/webservice/rest/server.php',
+        {
+          :query => query_hash('core_group_create_groups ', token),
+          :body => {
+            :groups => {
+              '0' => params
+            }
+            }
+        }.merge(query_options)
+      )
+      check_for_errors(response)
+      response.parsed_response.first
+    end
+
+    def groups(params)
+      response = self.class.post(
+        '/webservice/rest/server.php',
+        {
+          :query => query_hash('core_group_get_course_groups', token),
+          :body => {
+            :courseid => course_id
+          }
+        }.merge(query_options)
+      )
+      check_for_errors(response)
+      response.parsed_response
+    end
   end
 end
