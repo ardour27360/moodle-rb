@@ -91,6 +91,15 @@ moodle.enrolments.create(
 )
 ```
 
+Destroy an enrolment
+```
+moodle.enrolments.destroy(
+  :user_id => user_id,
+  :course_id => course_id
+  :teacher => false # Teacher or Student
+)
+```
+
 View enrolled users by course
 ```
 moodle.courses.enrolled_users(course_id)
