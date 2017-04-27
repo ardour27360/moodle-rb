@@ -39,7 +39,10 @@ module MoodleRb
           :query => query_hash('core_group_add_group_members', token),
           :body => {
             :members => {
-              '0' => params
+              '0' => {
+                  :groupid => params[:group_id],
+                  :userid => params[:user_id]
+              }
             }
           }
         }.merge(query_options)

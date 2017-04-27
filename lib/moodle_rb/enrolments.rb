@@ -51,7 +51,7 @@ module MoodleRb
               }
             }
           }
-          }.merge(query_options)
+        }.merge(query_options)
       )
       check_for_errors(response)
       response.code == 200 && response.parsed_response.nil?
