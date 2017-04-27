@@ -48,7 +48,7 @@ module MoodleRb
         }.merge(query_options)
       )
       check_for_errors(response)
-      response.parsed_response.first
+      response.code == 200 && response.parsed_response.nil?
     end
 
     def show(id)
