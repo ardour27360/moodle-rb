@@ -132,7 +132,7 @@ module MoodleRb
       response.parsed_response
     end
 
-    def groups(params)
+    def groups(course_id)
       response = self.class.post(
         '/webservice/rest/server.php',
         {
