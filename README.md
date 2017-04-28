@@ -50,6 +50,11 @@ moodle.courses.create_group(
 )
 ```
 
+Delete a group
+```
+moodle.courses.destroy_group(group_id)
+```
+
 List groups
 ```
 moodle.courses.groups(course_id)

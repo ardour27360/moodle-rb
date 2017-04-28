@@ -104,16 +104,32 @@ module MoodleRb
       response = self.class.post(
         '/webservice/rest/server.php',
         {
-          :query => query_hash('core_group_create_groups ', token),
+          :query => query_hash('core_group_create_groups', token),
           :body => {
             :groups => {
               '0' => params
             }
-            }
+          }
         }.merge(query_options)
       )
       check_for_errors(response)
       response.parsed_response.first
+    end
+
+    def destroy_group(group_id)
+      response = self.class.post(
+        '/webservice/rest/server.php',
+        {
+          :query => query_hash('core_group_delete_groups', token),
+          :body => {
+            :groups => {
+              :groupids => group_id
+            }
+          }
+        }.merge(query_options)
+      )
+      check_for_errors(response)
+      response.parsed_response
     end
 
     def groups(params)
