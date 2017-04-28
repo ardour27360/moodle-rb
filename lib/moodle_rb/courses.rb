@@ -122,14 +122,14 @@ module MoodleRb
         {
           :query => query_hash('core_group_delete_groups', token),
           :body => {
-            :groups => {
-              :groupids => group_id
+            :groupids => {
+              '0' => group_id
             }
           }
         }.merge(query_options)
       )
       check_for_errors(response)
-      response.parsed_response
+      response.parsed_response.first
     end
 
     def groups(course_id)
