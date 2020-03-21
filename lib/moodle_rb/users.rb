@@ -71,6 +71,21 @@ module MoodleRb
         response.parsed_response['users'].first
     end
 
+    def profile(user_id, course_id)
+      response = self.class.post(
+          '/webservice/rest/server.php',
+          {
+              :query => query_hash('core_user_view_user_profile', token),
+              :body => {
+                  :userid => user_id,
+                  :courseid => course_id
+              }
+          }.merge(query_options)
+      )
+      check_for_errors(response)
+      response.parsed_response
+    end
+
     def destroy(id)
       response = self.class.post(
         '/webservice/rest/server.php',

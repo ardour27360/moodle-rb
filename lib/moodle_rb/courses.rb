@@ -145,5 +145,48 @@ module MoodleRb
       check_for_errors(response)
       response.parsed_response
     end
+
+    def contents(course_id)
+      response = self.class.post(
+        '/webservice/rest/server.php',
+        {
+          :query => query_hash('core_course_get_contents', token),
+          :body => {
+            :courseid => course_id
+          }
+        }.merge(query_options)
+      )
+      check_for_errors(response)
+      response.parsed_response
+    end
+
+    def last_access(user_id)
+      response = self.class.post(
+          '/webservice/rest/server.php',
+          {
+              :query => query_hash('core_course_get_recent_courses', token),
+              :body => {
+                  :userid => user_id
+              }
+          }.merge(query_options)
+      )
+      check_for_errors(response)
+      response.parsed_response()
+    end
+
+    def updates(course_id, since)
+      response = self.class.post(
+          '/webservice/rest/server.php',
+          {
+              :query => query_hash('core_course_get_updates_since', token),
+              :body => {
+                  :courseid => course_id,
+                  :since => since
+              }
+          }.merge(query_options)
+      )
+      check_for_errors(response)
+      response.parsed_response()
+    end
   end
 end
