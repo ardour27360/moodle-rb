@@ -52,6 +52,31 @@ module MoodleRb
       response.parsed_response.first
     end
 
+    def update(params)
+      response = self.class.post(
+        '/webservice/rest/server.php',
+        {
+          :query => query_hash('core_course_update_courses', token),
+          :body => {
+            :courses => {
+              '0' => {
+                :fullname => params[:full_name],
+                :shortname => params[:short_name],
+                :categoryid => params[:parent_category],
+                :id => params[:id],
+                :visible => params[:visible],
+                :summary => params[:summary],
+                :startdate => params[:startdate],
+                :enddate => params[:enddate]
+              }
+            }
+          }
+        }.merge(query_options)
+      )
+      check_for_errors(response)
+      response.parsed_response.first
+    end
+
     def show(id)
       response = self.class.post(
         '/webservice/rest/server.php',
@@ -166,6 +191,21 @@ module MoodleRb
           {
               :query => query_hash('core_course_get_recent_courses', token),
               :body => {
+                  :userid => user_id
+              }
+          }.merge(query_options)
+      )
+      check_for_errors(response)
+      response.parsed_response()
+    end
+
+    def completion_status(course_id, user_id)
+      response = self.class.post(
+          '/webservice/rest/server.php',
+          {
+              :query => query_hash('core_completion_get_course_completion_status', token),
+              :body => {
+                  :courseid => course_id,
                   :userid => user_id
               }
           }.merge(query_options)
